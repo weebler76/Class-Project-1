@@ -1,20 +1,37 @@
-
-
 import requests
 import json
 
-#get city or zip from user 
-location = input("Please enter city or zipcode. ")
+def get_location():
+    '''Get and validate user info'''
+    inputIsGood = False
+    while inputIsGood == False:
+        location = input("Please enter a city name or 5 digit zipcode. ")
+        if (location.isnumeric() and len(location) == 5):
+            inputIsGood = True
+        elif (location.isalpha()):
+            inputIsGood = True
+        else:
+            print ("\nIncorrect city or zip entered.")
+            continue
+        return location
 
 
-response= requests.get(f"http://api.openweathermap.org/data/2.5/find?q={location}&APPID=b7102f66d17a9d1548feb5470a21746e")
 
-#tell user if connected
-if response.status_code == 200:
-    print("connected")
 
-else:
-    print("You failed.")
 
-print(response.json())
+
+
+            
+
+
+
+
+
+    
+    
+        
+
+
+
+
 
