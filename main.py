@@ -24,7 +24,7 @@ def main():
     location = get_location()
     try:
         r = requests.get(f"http://api.openweathermap.org/data/2.5/find?q={location},US&APPID=b7102f66d17a9d1548feb5470a21746e")
-        print("Successfully connected to openweathmap.org.")
+        print("\nSuccessfully connected to openweathmap.org.")
     except:
         print ("Failed to connect.")
         restart = input("(R)estart or (Q)?")
@@ -36,13 +36,23 @@ def main():
     
 
     data = r.json()
-    print (data)
-    print('')
+    print (f"\nCurrent weather for {location}" )
 
     
     temp = ((data['list'][0]['main']['temp']) -273.15) * 9/5 + 32
     temp1 = int(temp)
-    print (temp1)
+    print (f"Current temperature: {temp1}.")
+    humid = (data['list'][0]['main']['humidity'])
+    print (f"Humidity: {humid}%." )
+    w = (data['list'][0]['weather'][0]['description'])
+    print (f"Clouds: {w}")
+
+    again = input("\nWould you like to see weather for another location? y or n")
+    if again == "y":
+        main()
+    else:
+        exit()
+    
     
 
 
@@ -50,7 +60,6 @@ def main():
     
 if __name__ == "__main__":
     main()
-    
 
 
 
