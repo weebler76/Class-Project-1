@@ -23,7 +23,7 @@ def get_location():
 def main():
     location = get_location()
     try:
-        response = requests.get(f"http://api.openweathermap.org/data/2.5/find?q={location},US&APPID=b7102f66d17a9d1548feb5470a21746e")
+        r = requests.get(f"http://api.openweathermap.org/data/2.5/find?q={location},US&APPID=b7102f66d17a9d1548feb5470a21746e")
         print("Successfully connected to openweathmap.org.")
     except:
         print ("Failed to connect.")
@@ -33,25 +33,31 @@ def main():
             exit("Goodbye.")
         else:
             main()
-
-            
-
-    
-            
-        
-        
-
-
     
 
+    data = r.json()
+    print (data)
+    print('')
+
+    
+    temp = ((data['list'][0]['main']['temp']) -273.15) * 9/5 + 32
+    temp1 = int(temp)
+    print (temp1)
+    
 
 
-
-
-
-
+   
+    
 if __name__ == "__main__":
     main()
+    
+
+
+
+
+
+
+
 
     
 
