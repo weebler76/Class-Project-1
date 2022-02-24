@@ -47,7 +47,7 @@ def main():
     w = (data['list'][0]['weather'][0]['description'])
     print (f"Clouds: {w}")
 
-    again = input("\nWould you like to see weather for another location? y or n")
+    again = input("\nWould you like to see weather for another location? y or n ")
     if again == "y":
         main()
     else:
