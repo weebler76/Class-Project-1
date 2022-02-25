@@ -23,23 +23,33 @@ def run_again():
         run_again()
     
 def main():
-    #Connect to API and print connection status
+#Connect to API
     location = get_location()
     try:
-        r = requests.get(f"http://api.openweathermap.org/data/2.5/find?q={location},US&APPID=b7102f66d17a9d1548feb5470a21746e")
+        request = requests.get(f"http://api.openweathermap.org/data/2.5/find?q={location},US&APPID=b7102f66d17a9d1548feb5470a21746e")
+#Print connection status
         print("\nSuccessfully connected to openweathmap.org.\n")
     except:
-        print ("Failed to connect.")
-        restart = input("(R)estart or (Q)?")
-        case = restart.lower()
-        if case == "q":
-            exit("Goodbye.")
-        else:
-            main()
+        print ("\nFailed to connect.")
+        loop = True
+        while loop == True:
+            restart = input("(R)estart or (Q)? ")
+            print ("")
+            case = restart.lower()
+            if case == "q":
+                loop = False
+                exit("Goodbye.")
+            elif case == "r":
+                loop = False
+                main()
+            else:
+                print ("Please enter r or q. ")
+                
+                
 
 #Print weather info
 #Try except block to validate user input from get_location function
-    data = r.json()
+    data = request.json()
     try:
         temp = ((data['list'][0]['main']['temp']) -273.15) * 9/5 + 32
         temp1 = int(temp)
